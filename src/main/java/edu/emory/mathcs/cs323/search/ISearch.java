@@ -22,6 +22,10 @@ import java.util.List;
  */
 public interface ISearch<T extends Comparable<T>>
 {
-	/** @return the index of the specific key in the list if exists; otherwise, -1. */
+	/**
+	 * @param list a list containing zero to many keys.
+	 * @param key a key to be searched.
+	 * @return the index of the key in the list if exists; otherwise, a negative integer.
+	 */
 	int search(List<T> list, T key);
 }
