@@ -58,10 +58,14 @@ public class SelectTest
 		
 		for (int k=1; k<=100; k++)
 		{
-			System.out.printf("%2d:"  , k);
-			System.out.printf("%10d"  , testSelect(s1, array, k, warmup, benchmark));
-			System.out.printf("%10d"  , testSelect(s2, array, k, warmup, benchmark));
-			System.out.printf("%10d\n", testSelect(s3, array, k, warmup, benchmark));
+//			System.out.printf("%2d:"  , k);
+//			System.out.printf("%10d"  , testSelect(s1, array, k, warmup, benchmark));
+//			System.out.printf("%10d"  , testSelect(s2, array, k, warmup, benchmark));
+//			System.out.printf("%10d\n", testSelect(s3, array, k, warmup, benchmark));
+			
+			System.out.print(testSelect(s1, array, k, warmup, benchmark)+"\t");
+			System.out.print(testSelect(s2, array, k, warmup, benchmark)+"\t");
+			System.out.print(testSelect(s3, array, k, warmup, benchmark)+"\n");
 		}
 	}
 	
