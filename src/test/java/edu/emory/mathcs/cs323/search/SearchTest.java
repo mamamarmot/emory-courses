@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -33,29 +34,37 @@ public class SearchTest
 	@Test
 	public void testAccuracy()
 	{
-		List<Integer> randomList = getRandomList(new Random(0), 10, 10);
-		List<Integer> sortedList = new ArrayList<>(randomList);
-		Collections.sort(sortedList);
-		
 		ISearch<Integer> s1 = new SequentialSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
-		int actual;
+		List<Integer> list = new ArrayList<>();
+		int[] keys = {5, 2, 3, 2, 1, 1, 4};
 		
-		for (Integer key : randomList)
-		{
-			actual = Collections.binarySearch(sortedList, key);
-			assertEquals(s1.search(sortedList, key), actual);
-			assertEquals(s2.search(sortedList, key), actual);
-		}
+		for (int key : keys)
+			list.add(key);
 		
-		for (int key : new int[]{-1, 20})
-		{
-			assertTrue(s1.search(sortedList, key) < 0);
-			assertTrue(s2.search(sortedList, key) < 0);
-		}
+		assertEquals(s1.search(list, 5), 0);
+		assertEquals(s1.search(list, 2), 1);
+		assertEquals(s1.search(list, 3), 2);
+		assertEquals(s1.search(list, 1), 4);
+		assertEquals(s1.search(list, 4), 6);
+		
+		assertTrue(s1.search(list, 0) < 0);
+		assertTrue(s1.search(list, 6) < 0);
+		
+		Collections.sort(list);
+		
+		assertEquals(s2.search(list, 5), 6);
+		assertEquals(s2.search(list, 2), 3);
+		assertEquals(s2.search(list, 3), 4);
+		assertEquals(s2.search(list, 1), 1);
+		assertEquals(s2.search(list, 4), 5);
+		
+		assertTrue(s2.search(list, 0) < 0);
+		assertTrue(s2.search(list, 6) < 0);
 	}
 	
 	@Test
+	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
