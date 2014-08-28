@@ -13,30 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.select;
+package edu.emory.mathcs.cs323;
 
-import java.util.Collections;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
-import edu.emory.mathcs.utils.DSUtils;
+import org.junit.Test;
+
+import edu.emory.mathcs.utils.MathUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class Select1<T extends Comparable<T>> extends AbstractSelect<T>
+public class MathUtilsTest
 {
-	@Override
-	public T maxAux(T[] array, int k)
+	@Test
+	public void testSum()
 	{
-		List<T> copy = DSUtils.toArrayList(array);
-		T max = null;
-		
-		for (int i=0; i<k; i++)
-		{
-			max = Collections.max(copy);
-			copy.remove(max);
-		}
-	
-		return max;
+		assertEquals(MathUtils.sum(new int[]{1,2,3,4,5}), 15);
 	}
 }

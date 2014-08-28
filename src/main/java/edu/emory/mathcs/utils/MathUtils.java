@@ -15,15 +15,24 @@
  */
 package edu.emory.mathcs.utils;
 
-import java.util.ArrayList;
-
-/** @author Jinho D. Choi ({@code jinho.choi@emory.edu}) */
-public class Utils
+/**
+ * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ */
+public class MathUtils
 {
-	static public <T>ArrayList<T> toArrayList(T[] array)
+	/** @return the sum of all integers in the specific array. */
+	static public int sum(int[] array)
 	{
-		ArrayList<T> list = new ArrayList<>(array.length);
-		for (T item : array) list.add(item); 
-		return list;
+		int sum = 0;
+		
+		for (int i : array)
+			sum += i;
+		
+		return sum;
+	}
+	
+	static public void main(String[] args)
+	{
+		System.out.println(sum(new int[]{1,2,3,4,5}));
 	}
 }

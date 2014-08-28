@@ -18,7 +18,7 @@ package edu.emory.mathcs.cs323.select;
 import java.util.List;
 
 import edu.emory.mathcs.utils.IndexedItem;
-import edu.emory.mathcs.utils.Utils;
+import edu.emory.mathcs.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -28,7 +28,7 @@ public class Select2<T extends Comparable<T>> extends AbstractSelect<T>
 	@Override
 	public T maxAux(T[] array, int k)
 	{
-		List<T> copy = Utils.toArrayList(array);
+		List<T> copy = DSUtils.toArrayList(array);
 		IndexedItem<T> max = null;
 		
 		for (int i=0; i<k; i++)

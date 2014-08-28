@@ -13,30 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.select;
-
-import java.util.Collections;
-import java.util.List;
-
-import edu.emory.mathcs.utils.DSUtils;
+package edu.emory.mathcs.cs323;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class Select1<T extends Comparable<T>> extends AbstractSelect<T>
+public enum utils
 {
-	@Override
-	public T maxAux(T[] array, int k)
-	{
-		List<T> copy = DSUtils.toArrayList(array);
-		T max = null;
-		
-		for (int i=0; i<k; i++)
-		{
-			max = Collections.max(copy);
-			copy.remove(max);
-		}
-	
-		return max;
-	}
+
 }
