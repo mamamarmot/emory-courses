@@ -25,11 +25,11 @@ import java.util.List;
 public class Select3<T extends Comparable<T>> extends AbstractSelect<T>
 {
 	@Override
-	protected T maxAux(T[] array, int k)
+	public T max(List<T> list, int k)
 	{
 		List<T> maxK = new ArrayList<>(k);
 		
-		for (T item : array)
+		for (T item : list)
 			insert(maxK, item, k);
 		
 		return maxK.get(maxK.size()-1);

@@ -22,10 +22,8 @@ import java.util.List;
  */
 public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 {
-	/**
-	 * @param list a list sorted in ascending order.
-	 * @return the index of the specific item in the list if exists; otherwise, -1.
-	 */
+	@Override
+	/** @param list a list sorted in ascending order. */
 	public int search(List<T> list, T key)
 	{
 		return searchRecursive(list, key, 0, list.size()-1); 
@@ -35,7 +33,7 @@ public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 	 * @param beginIndex the index of the first key to be searched (inclusive).
 	 * @param endIndex the index of the last key to be searched (inclusive). 
 	 */
-	int searchRecursive(List<T> list, T key, int beginIndex, int endIndex)
+	protected int searchRecursive(List<T> list, T key, int beginIndex, int endIndex)
 	{
 		if (beginIndex >= endIndex)
 			return key.equals(list.get(beginIndex)) ? beginIndex : -1;

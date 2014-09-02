@@ -15,22 +15,24 @@
  */
 package edu.emory.mathcs.cs323.select;
 
+import java.util.List;
 
-/** @author Jinho D. Choi ({@code jinho.choi@emory.edu}) */
-abstract public class AbstractSelect<T extends Comparable<T>>
+/**
+ * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
+ */
+public abstract class AbstractSelect<T extends Comparable<T>>
 {
 	/**
-	 * @return the item with the k'th maximum value in the array.
-	 * @throws IllegalArgumentException if {@code array} is {@code null} or {@code array.length < k}. 
+	 * @param list a list of unsorted keys.
+	 * @param k the k'th maximum key to search.
+	 * @return the k'th maximum key in the list.
+	 * @throws IllegalArgumentException if the size of the list is smaller than {@code k}. 
 	 */
-	public T max(T[] array, int k)
-	{
-		if (array == null || array.length < k)
-			throw new IllegalArgumentException();
-		
-		return maxAux(array, k);
-	}
+	abstract public T max(List<T> list, int k);
 	
-	/** An auxiliary method of {@link #max(Comparable[], int)}. */
-	abstract protected T maxAux(T[] array, int k);
+	protected void throwIllegalArgumentException(List<T> list, int k)
+	{
+		if (list.size() < k)
+			throw new IllegalArgumentException("The array size is smaller than k.");
+	}
 }

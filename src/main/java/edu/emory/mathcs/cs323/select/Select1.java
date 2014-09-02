@@ -15,10 +15,9 @@
  */
 package edu.emory.mathcs.cs323.select;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import edu.emory.mathcs.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -26,9 +25,10 @@ import edu.emory.mathcs.utils.DSUtils;
 public class Select1<T extends Comparable<T>> extends AbstractSelect<T>
 {
 	@Override
-	public T maxAux(T[] array, int k)
+	public T max(List<T> list, int k)
 	{
-		List<T> copy = DSUtils.toArrayList(array);
+		throwIllegalArgumentException(list, k);
+		List<T> copy = new ArrayList<>(list);
 		T max = null;
 		
 		for (int i=0; i<k; i++)

@@ -15,10 +15,10 @@
  */
 package edu.emory.mathcs.cs323.select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.emory.mathcs.utils.IndexedItem;
-import edu.emory.mathcs.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -26,9 +26,9 @@ import edu.emory.mathcs.utils.DSUtils;
 public class Select2<T extends Comparable<T>> extends AbstractSelect<T>
 {
 	@Override
-	public T maxAux(T[] array, int k)
+	public T max(List<T> list, int k)
 	{
-		List<T> copy = DSUtils.toArrayList(array);
+		List<T> copy = new ArrayList<>(list);
 		IndexedItem<T> max = null;
 		
 		for (int i=0; i<k; i++)
@@ -41,7 +41,7 @@ public class Select2<T extends Comparable<T>> extends AbstractSelect<T>
 	}
 	
 	/** @return the first item with the maximum value in the list and its index. */
-	private IndexedItem<T> max(List<T> list)
+	IndexedItem<T> max(List<T> list)
 	{
 		IndexedItem<T> max = new IndexedItem<>(list.get(0), 0);
 		T item;

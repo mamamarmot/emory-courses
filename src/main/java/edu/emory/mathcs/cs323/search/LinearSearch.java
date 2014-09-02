@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class SequentialSearch<T extends Comparable<T>> implements ISearch<T>
+public class LinearSearch<T extends Comparable<T>> implements ISearch<T>
 {
 	@Override
 	public int search(List<T> list, T key)
