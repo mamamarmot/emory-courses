@@ -35,7 +35,7 @@ public class SearchTest
 	@Test
 	public void testAccuracy()
 	{
-		ISearch<Integer> s1 = new SequentialSearch<>();
+		ISearch<Integer> s1 = new LinearSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
 		List<Integer> list = new ArrayList<>();
 		int[] keys = {5, 2, 3, 2, 1, 1, 4, 2};
@@ -69,13 +69,13 @@ public class SearchTest
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
-		testSpeed(new SequentialSearch<Integer>(), new BinarySearch<Integer>());
+		testSpeed(new LinearSearch<Integer>(), new BinarySearch<Integer>());
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void testSpeed(ISearch<Integer>... engines)
+	void testSpeed(final ISearch<Integer>... engines)
 	{
-		final int inc = 100, benchmark = 1000000;
+		final int INC = 100, ITER = 1000000;
 		final Random rand = new Random(0);
 		
 		StringBuilder build = new StringBuilder();
@@ -83,14 +83,14 @@ public class SearchTest
 		
 		for (int i=0; i<10; i++)
 		{
-			list.addAll(DSUtils.getRandomIntegerList(rand, inc));
+			list.addAll(DSUtils.getRandomIntegerList(rand, INC));
 			build.append(list.size());
 			Collections.sort(list);
 			
 			for (ISearch<Integer> engine : engines)
 			{
 				build.append("\t");
-				build.append(getRunTime(list, engine, benchmark));
+				build.append(getRuntime(list, engine, ITER));
 			}
 			
 			build.append("\n");
@@ -99,7 +99,7 @@ public class SearchTest
 		System.out.println(build.toString());
 	}
 	
-	long getRunTime(List<Integer> list, ISearch<Integer> engine, int iterations)
+	long getRuntime(List<Integer> list, ISearch<Integer> engine, int iterations)
 	{
 		final Random rand = new Random(1);
 		long st, et;

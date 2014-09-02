@@ -22,21 +22,28 @@ import java.util.List;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class Select1<T extends Comparable<T>> extends AbstractSelect<T>
+public class SmartSelect<T extends Comparable<T>> extends AbstractSelect<T>
 {
 	@Override
 	public T max(List<T> list, int k)
 	{
-		throwIllegalArgumentException(list, k);
-		List<T> copy = new ArrayList<>(list);
-		T max = null;
+		List<T> maxK = new ArrayList<>(k);
 		
-		for (int i=0; i<k; i++)
-		{
-			max = Collections.max(copy);
-			copy.remove(max);
-		}
+		for (T item : list)
+			insert(maxK, item, k);
+		
+		return maxK.get(maxK.size()-1);
+	}
 	
-		return max;
+	private void insert(List<T> sortedList, T item, int k)
+	{
+		int index = Collections.binarySearch(sortedList, item, Collections.reverseOrder());
+		if (index < 0) index = -(index + 1);
+		
+		if (index < k)
+		{
+			sortedList.add(index, item);
+			if (sortedList.size() > k) sortedList.remove(sortedList.size()-1);
+		}
 	}
 }

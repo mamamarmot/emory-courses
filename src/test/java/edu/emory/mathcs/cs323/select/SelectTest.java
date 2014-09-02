@@ -17,11 +17,14 @@ package edu.emory.mathcs.cs323.select;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
+
+import edu.emory.mathcs.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -31,63 +34,63 @@ public class SelectTest
 	@Test
 	public void testAccuracy()
 	{
-		AbstractSelect<Integer> s1 = new Select1<Integer>();
-		AbstractSelect<Integer> s2 = new Select2<Integer>();
-		AbstractSelect<Integer> s3 = new Select3<Integer>();
+		AbstractSelect<Integer> s1 = new DumbSelect<Integer>();
+		AbstractSelect<Integer> s2 = new SmartSelect<Integer>();
 		
-		Integer[] originalArray = {4,1,3,2,5,6,8,3,4,7,5,9,7};
-		Integer[] sortedArray   = Arrays.copyOf(originalArray, originalArray.length);
-		Arrays.sort(sortedArray, Collections.reverseOrder());
+		List<Integer> originalList = DSUtils.toArrayList(new Integer[]{4,1,3,2,5,6,8,3,4,7,5,9,7});
+		List<Integer> sortedList   = new ArrayList<>(originalList);
+		Collections.sort(sortedList, Collections.reverseOrder());
 		
-		for (int k=0; k<originalArray.length; k++)
+		for (int k=0; k<originalList.size(); k++)
 		{
-			assertEquals(sortedArray[k], s1.max(originalArray, k+1));
-			assertEquals(sortedArray[k], s2.max(originalArray, k+1));
-			assertEquals(sortedArray[k], s3.max(originalArray, k+1));
+			assertEquals(sortedList.get(k), s1.max(originalList, k+1));
+			assertEquals(sortedList.get(k), s2.max(originalList, k+1));
 		}
 	}
 	
 	@Test
+	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
-		AbstractSelect<Integer> s1 = new Select1<Integer>();
-		AbstractSelect<Integer> s2 = new Select2<Integer>();
-		AbstractSelect<Integer> s3 = new Select3<Integer>();
-		Integer[] array = getRandomArray(1000, 0);
-		int warmup = 10, benchmark = 1000;
-		
-		for (int k=1; k<=100; k++)
-		{
-//			System.out.printf("%2d:"  , k);
-//			System.out.printf("%10d"  , testSelect(s1, array, k, warmup, benchmark));
-//			System.out.printf("%10d"  , testSelect(s2, array, k, warmup, benchmark));
-//			System.out.printf("%10d\n", testSelect(s3, array, k, warmup, benchmark));
-			
-			System.out.print(testSelect(s1, array, k, warmup, benchmark)+"\t");
-			System.out.print(testSelect(s2, array, k, warmup, benchmark)+"\t");
-			System.out.print(testSelect(s3, array, k, warmup, benchmark)+"\n");
-		}
+		testSpeed(new DumbSelect<Integer>(), new SmartSelect<Integer>());
 	}
 	
-	private Integer[] getRandomArray(int size, int seed)
+	@SuppressWarnings("unchecked")
+	void testSpeed(final AbstractSelect<Integer>... engines)
 	{
-		Integer[] array = new Integer[size];
-		Random rand = new Random(seed);
+		final int MAX_K = 100, ITER = 1000, SIZE = 1000, ENGINE_LEN = engines.length;
+		List<Integer> list = DSUtils.getRandomIntegerList(new Random(1), SIZE);
+		long[][] times = new long[ENGINE_LEN][MAX_K];
+
+		for (int i=0; i<ITER; i++)
+			for (int j=0; j<ENGINE_LEN; j++)
+				for (int k=0; k<MAX_K; k++)
+					times[j][k] += getRuntime(engines[j], list, k+1);
+
+		StringBuilder build = new StringBuilder();
 		
-		for (int i=0; i<size; i++)
-			array[i] = rand.nextInt();
+		for (int k=0; k<MAX_K; k++)
+		{
+			build.append(k+1);
+			
+			for (int j=0; j<ENGINE_LEN; j++)
+			{
+				build.append("\t");
+				build.append(1.0*times[j][k]/ITER);
+			}
+			
+			build.append("\n");
+		}
 		
-		return array;
+		System.out.println(build.toString());
 	}
 	
-	private long testSelect(AbstractSelect<Integer> s, Integer[] array, int k, int warmup, int benchmark)
+	long getRuntime(AbstractSelect<Integer> s, List<Integer> list, int k)
 	{
 		long st, et;
-		int i;
 		
-		for (i=0; i<warmup; i++) s.max(array, k);
 		st = System.currentTimeMillis();
-		for (i=0; i<benchmark; i++) s.max(array, k);
+		s.max(list, k);
 		et = System.currentTimeMillis();
 		
 		return et - st;
