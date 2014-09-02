@@ -22,9 +22,16 @@ import java.util.Random;
 /** @author Jinho D. Choi ({@code jinho.choi@emory.edu}) */
 public class DSUtils
 {
-	static public <T>ArrayList<T> toArrayList(T[] array)
+	static public List<Integer> toIntegerList(int... array)
 	{
-		ArrayList<T> list = new ArrayList<>(array.length);
+		List<Integer> list = new ArrayList<>(array.length);
+		for (int item : array) list.add(item);
+		return list;
+	}
+	
+	static public <T>List<T> toList(T[] array)
+	{
+		List<T> list = new ArrayList<>(array.length);
 		for (T item : array) list.add(item); 
 		return list;
 	}

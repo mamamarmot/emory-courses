@@ -37,7 +37,7 @@ public class SelectTest
 		AbstractSelect<Integer> s1 = new DumbSelect<Integer>();
 		AbstractSelect<Integer> s2 = new SmartSelect<Integer>();
 		
-		List<Integer> originalList = DSUtils.toArrayList(new Integer[]{4,1,3,2,5,6,8,3,4,7,5,9,7});
+		List<Integer> originalList = DSUtils.toIntegerList(4,1,3,2,5,6,8,3,4,7,5,9,7);
 		List<Integer> sortedList   = new ArrayList<>(originalList);
 		Collections.sort(sortedList, Collections.reverseOrder());
 		
@@ -76,7 +76,7 @@ public class SelectTest
 			for (int j=0; j<ENGINE_LEN; j++)
 			{
 				build.append("\t");
-				build.append(1.0*times[j][k]/ITER);
+				build.append(times[j][k]);
 			}
 			
 			build.append("\n");

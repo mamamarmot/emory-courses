@@ -37,11 +37,7 @@ public class SearchTest
 	{
 		ISearch<Integer> s1 = new LinearSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
-		List<Integer> list = new ArrayList<>();
-		int[] keys = {5, 2, 3, 2, 1, 1, 4, 2};
-		
-		for (int key : keys)
-			list.add(key);
+		List<Integer> list = DSUtils.toIntegerList(5, 2, 3, 2, 1, 1, 4, 2);
 		
 		assertEquals(s1.search(list, 5), 0);
 		assertEquals(s1.search(list, 2), 1);

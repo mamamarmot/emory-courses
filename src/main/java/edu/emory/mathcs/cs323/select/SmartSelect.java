@@ -35,15 +35,15 @@ public class SmartSelect<T extends Comparable<T>> extends AbstractSelect<T>
 		return maxK.get(maxK.size()-1);
 	}
 	
-	private void insert(List<T> sortedList, T item, int k)
+	private void insert(List<T> maxK, T item, int k)
 	{
-		int index = Collections.binarySearch(sortedList, item, Collections.reverseOrder());
+		int index = Collections.binarySearch(maxK, item, Collections.reverseOrder());
 		if (index < 0) index = -(index + 1);
 		
 		if (index < k)
 		{
-			sortedList.add(index, item);
-			if (sortedList.size() > k) sortedList.remove(sortedList.size()-1);
+			maxK.add(index, item);
+			if (maxK.size() > k) maxK.remove(maxK.size()-1);
 		}
 	}
 }
