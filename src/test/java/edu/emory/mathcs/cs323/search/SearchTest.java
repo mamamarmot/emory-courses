@@ -23,8 +23,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
+import edu.emory.mathcs.utils.DSUtils;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -37,7 +38,7 @@ public class SearchTest
 		ISearch<Integer> s1 = new SequentialSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
 		List<Integer> list = new ArrayList<>();
-		int[] keys = {5, 2, 3, 2, 1, 1, 4};
+		int[] keys = {5, 2, 3, 2, 1, 1, 4, 2};
 		
 		for (int key : keys)
 			list.add(key);
@@ -52,19 +53,19 @@ public class SearchTest
 		assertTrue(s1.search(list, 6) < 0);
 		
 		Collections.sort(list);
+	// 	list = [1, 1, 2, 2, 2, 3, 4, 5]
 		
-		assertEquals(s2.search(list, 5), 6);
+		assertEquals(s2.search(list, 5), 7);
 		assertEquals(s2.search(list, 2), 3);
-		assertEquals(s2.search(list, 3), 4);
+		assertEquals(s2.search(list, 3), 5);
 		assertEquals(s2.search(list, 1), 1);
-		assertEquals(s2.search(list, 4), 5);
+		assertEquals(s2.search(list, 4), 6);
 		
 		assertTrue(s2.search(list, 0) < 0);
 		assertTrue(s2.search(list, 6) < 0);
 	}
 	
 	@Test
-	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{
@@ -74,26 +75,22 @@ public class SearchTest
 	@SuppressWarnings("unchecked")
 	public void testSpeed(ISearch<Integer>... engines)
 	{
-		final int inc = 100, warmup = 10, benchmark = 1000;;
+		final int inc = 100, benchmark = 1000000;
 		final Random rand = new Random(0);
 		
-		List<Integer> randomList = new ArrayList<>();
-		List<Integer> sortedList = new ArrayList<>();
 		StringBuilder build = new StringBuilder();
-		List<Integer> list;
+		List<Integer> list  = new ArrayList<>();
 		
-		for (int i=1; i<=10; i++)
+		for (int i=0; i<10; i++)
 		{
-			list = getRandomList(rand, i*inc, Integer.MAX_VALUE);
-			randomList.addAll(list);
-			sortedList.addAll(list);
-			Collections.sort(sortedList);
+			list.addAll(DSUtils.getRandomIntegerList(rand, inc));
+			build.append(list.size());
+			Collections.sort(list);
 			
 			for (ISearch<Integer> engine : engines)
 			{
-				getRunTime(randomList, sortedList, engine, warmup);
-				build.append(getRunTime(randomList, sortedList, engine, benchmark));
 				build.append("\t");
+				build.append(getRunTime(list, engine, benchmark));
 			}
 			
 			build.append("\n");
@@ -102,28 +99,16 @@ public class SearchTest
 		System.out.println(build.toString());
 	}
 	
-	List<Integer> getRandomList(Random rand, int size, int bound)
+	long getRunTime(List<Integer> list, ISearch<Integer> engine, int iterations)
 	{
-		List<Integer> list = new ArrayList<>(size);
-		
-		for (int i=0; i<size; i++)
-			list.add(rand.nextInt(bound));
-		
-		return list;
-	}
-	
-	long getRunTime(List<Integer> randomList, List<Integer> sortedList, ISearch<Integer> engine, int iterations)
-	{
+		final Random rand = new Random(1);
 		long st, et;
 		int i;
 		
 		st = System.currentTimeMillis();
 		
 		for (i=0; i<iterations; i++)
-		{
-			for (Integer item : randomList)
-				engine.search(sortedList, item);			
-		}
+			engine.search(list, rand.nextInt());
 		
 		et = System.currentTimeMillis();
 		

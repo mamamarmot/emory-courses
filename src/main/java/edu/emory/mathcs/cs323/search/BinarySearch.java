@@ -28,25 +28,25 @@ public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 	 */
 	public int search(List<T> list, T key)
 	{
-		return searchAux(list, key, 0, list.size()-1); 
+		return searchRecursive(list, key, 0, list.size()-1); 
 	}
 	
 	/**
 	 * @param beginIndex the index of the first key to be searched (inclusive).
 	 * @param endIndex the index of the last key to be searched (inclusive). 
 	 */
-	int searchAux(List<T> list, T key, int beginIndex, int endIndex)
+	int searchRecursive(List<T> list, T key, int beginIndex, int endIndex)
 	{
-		if (beginIndex == endIndex)
+		if (beginIndex >= endIndex)
 			return key.equals(list.get(beginIndex)) ? beginIndex : -1;
 		
 		int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
 		int diff = key.compareTo(list.get(middleIndex));
-		
+
 		if (diff > 0)
-			return searchAux(list, key, middleIndex+1, endIndex);
+			return searchRecursive(list, key, middleIndex+1, endIndex);
 		else if (diff < 0)
-			return searchAux(list, key, beginIndex, middleIndex-1);
+			return searchRecursive(list, key, beginIndex, middleIndex-1);
 		else
 			return middleIndex;
 	}

@@ -16,6 +16,8 @@
 package edu.emory.mathcs.utils;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /** @author Jinho D. Choi ({@code jinho.choi@emory.edu}) */
 public class DSUtils
@@ -24,6 +26,16 @@ public class DSUtils
 	{
 		ArrayList<T> list = new ArrayList<>(array.length);
 		for (T item : array) list.add(item); 
+		return list;
+	}
+	
+	static public List<Integer> getRandomIntegerList(Random rand, int size)
+	{
+		List<Integer> list = new ArrayList<>(size);
+		
+		for (int i=0; i<size; i++)
+			list.add(rand.nextInt());
+		
 		return list;
 	}
 }
