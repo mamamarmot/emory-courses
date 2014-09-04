@@ -34,18 +34,18 @@ public class SelectTest
 	@Test
 	public void testAccuracy()
 	{
-		AbstractSelect<Integer> s1 = new DumbSelect<Integer>();
-		AbstractSelect<Integer> s2 = new SmartSelect<Integer>();
-		
+		testAccuracy(new DumbSelect<>());
+		testAccuracy(new SmartSelect<>());
+	}
+	
+	void testAccuracy(AbstractSelect<Integer> s)
+	{
 		List<Integer> originalList = DSUtils.toIntegerList(4,1,3,2,5,6,8,3,4,7,5,9,7);
 		List<Integer> sortedList   = new ArrayList<>(originalList);
 		Collections.sort(sortedList, Collections.reverseOrder());
 		
 		for (int k=0; k<originalList.size(); k++)
-		{
-			assertEquals(sortedList.get(k), s1.max(originalList, k+1));
-			assertEquals(sortedList.get(k), s2.max(originalList, k+1));
-		}
+			assertEquals(sortedList.get(k), s.max(originalList, k+1));
 	}
 	
 	@Test
@@ -56,16 +56,16 @@ public class SelectTest
 	}
 	
 	@SuppressWarnings("unchecked")
-	void testSpeed(final AbstractSelect<Integer>... engines)
+	void testSpeed(final AbstractSelect<Integer>... ss)
 	{
-		final int MAX_K = 100, ITER = 1000, SIZE = 1000, ENGINE_LEN = engines.length;
+		final int ITER = 1000, SIZE = 1000, MAX_K = 100, LENGTH = ss.length;
 		List<Integer> list = DSUtils.getRandomIntegerList(new Random(1), SIZE);
-		long[][] times = new long[ENGINE_LEN][MAX_K];
+		long[][] times = new long[LENGTH][MAX_K];
 
 		for (int i=0; i<ITER; i++)
-			for (int j=0; j<ENGINE_LEN; j++)
+			for (int j=0; j<LENGTH; j++)
 				for (int k=0; k<MAX_K; k++)
-					times[j][k] += getRuntime(engines[j], list, k+1);
+					times[j][k] += getRuntime(ss[j], list, k+1);
 
 		StringBuilder build = new StringBuilder();
 		
@@ -73,7 +73,7 @@ public class SelectTest
 		{
 			build.append(k+1);
 			
-			for (int j=0; j<ENGINE_LEN; j++)
+			for (int j=0; j<LENGTH; j++)
 			{
 				build.append("\t");
 				build.append(times[j][k]);
