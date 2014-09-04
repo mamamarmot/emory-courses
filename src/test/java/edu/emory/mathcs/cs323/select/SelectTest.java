@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.utils.DSUtils;
@@ -49,6 +50,7 @@ public class SelectTest
 	}
 	
 	@Test
+	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{

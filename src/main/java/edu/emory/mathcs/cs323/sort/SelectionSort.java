@@ -15,7 +15,6 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -23,7 +22,7 @@ import java.util.List;
 public class SelectionSort<T extends Comparable<T>> implements ISort<T>
 {
 	@Override
-	public void sort(List<T> list)
+	public void sort(T[] array)
 	{
 		
 		

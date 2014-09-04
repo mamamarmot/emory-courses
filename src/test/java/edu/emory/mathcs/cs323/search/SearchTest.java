@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.utils.DSUtils;
@@ -35,9 +36,9 @@ public class SearchTest
 	@Test
 	public void testAccuracy()
 	{
+		List<Integer> list = DSUtils.toIntegerList(5, 2, 3, 2, 1, 1, 4, 2);
 		ISearch<Integer> s1 = new LinearSearch<>();
 		ISearch<Integer> s2 = new BinarySearch<>();
-		List<Integer> list = DSUtils.toIntegerList(5, 2, 3, 2, 1, 1, 4, 2);
 		
 		assertEquals(s1.search(list, 5), 0);
 		assertEquals(s1.search(list, 2), 1);
@@ -62,6 +63,7 @@ public class SearchTest
 	}
 	
 	@Test
+	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{

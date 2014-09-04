@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import edu.emory.mathcs.utils.DSUtils;
@@ -34,6 +35,7 @@ public class PriorityQueueTest
 	@Test
 	public void testAccuracy()
 	{
+		testAccuracy(new LazyPriorityQueue<>());
 		testAccuracy(new EagerPriorityQueue<>());
 		testAccuracy(new BinaryHeap<>());
 	}
@@ -52,6 +54,7 @@ public class PriorityQueueTest
 	}
 	
 	@Test
+	@Ignore
 	@SuppressWarnings("unchecked")
 	public void testSpeed()
 	{

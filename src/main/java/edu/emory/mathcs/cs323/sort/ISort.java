@@ -15,13 +15,15 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public interface ISort<T extends Comparable<T>>
 {
-	/** @param list a list of comparable keys. */
-	void sort(List<T> list);
+	/**
+	 * Sorts the array in ascending order.
+	 * @param array an array of comparable keys.
+	 */
+	void sort(T[] array);
 }

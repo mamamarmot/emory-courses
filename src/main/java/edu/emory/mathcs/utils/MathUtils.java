@@ -31,8 +31,19 @@ public class MathUtils
 		return sum;
 	}
 	
-	static public void main(String[] args)
+	
+	/**
+	 * @param beginIndex inclusive.
+	 * @param endIndex inclusive.
+	 * @return the middle (center) index between the beginning and the end indexes.
+	 */
+	static public int getMiddleIndex(int beginIndex, int endIndex)
 	{
-		System.out.println(sum(new int[]{1,2,3,4,5}));
+		return beginIndex + (endIndex - beginIndex) / 2;
 	}
+	
+//	static public void main(String[] args)
+//	{
+//		System.out.println(sum(new int[]{1,2,3,4,5}));
+//	}
 }

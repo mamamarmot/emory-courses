@@ -13,18 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.emory.mathcs.cs323.sort;
+package edu.emory.mathcs.cs323.queue;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class QuickSort<T extends Comparable<T>> implements ISort<T>
+public class LazyPriorityQueue<T extends Comparable<T>> extends AbstractPriorityQueue<T>
 {
-	@Override
-	public void sort(T[] array)
+	private List<T> l_keys;
+	
+	public LazyPriorityQueue()
 	{
-		
-		
+		l_keys = new ArrayList<>();
+	}
+
+	@Override
+	public int size()
+	{
+		return l_keys.size();
+	}
+
+	@Override
+	public void add(T key)
+	{
+		l_keys.add(key);
+	}
+
+	@Override
+	public T removeMax()
+	{
+		throwNoSuchElementException();
+		T max = Collections.max(l_keys);
+		l_keys.remove(max);
+		return max;
 	}
 }

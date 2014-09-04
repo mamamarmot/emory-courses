@@ -15,16 +15,34 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
+
+import org.junit.Test;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class QuickSort<T extends Comparable<T>> implements ISort<T>
+public class SortTest
 {
-	@Override
-	public void sort(T[] array)
+	@Test
+	public void testAccuracy()
 	{
+		testAccuracy(new InsertionSort<>());
+		testAccuracy(new MergeSort<>());
+	}
+	
+	void testAccuracy(ISort<Integer> s)
+	{
+		Integer[] originalArray = {5, 2, 3, 2, 1, 1, 4, 2};
+		Integer[] sortedArray;
 		
+		sortedArray = Arrays.copyOf(originalArray, originalArray.length);
+		Arrays.sort(sortedArray);
+		s.sort(originalArray);
 		
+		for (int i=0; i<originalArray.length; i++)
+			assertEquals(sortedArray[i], originalArray[i]);
 	}
 }

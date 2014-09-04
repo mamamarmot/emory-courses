@@ -61,8 +61,20 @@ public class DSUtils
 		return list.get(i).compareTo(list.get(j));
 	}
 	
+	static public <T extends Comparable<T>>int compareTo(T[] array, int i, int j)
+	{
+		return array[i].compareTo(array[j]);
+	}
+	
 	static public <T extends Comparable<T>>void swap(List<T> list, int i, int j)
 	{
 		list.set(j, list.set(i, list.get(j)));
+	}
+	
+	static public <T extends Comparable<T>>void swap(T[] array, int i, int j)
+	{
+		T t = array[i];
+		array[i] = array[j];
+		array[j] = t;
 	}
 }

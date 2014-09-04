@@ -17,6 +17,8 @@ package edu.emory.mathcs.cs323.search;
 
 import java.util.List;
 
+import edu.emory.mathcs.utils.MathUtils;
+
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
@@ -41,7 +43,7 @@ public class BinarySearch<T extends Comparable<T>> implements ISearch<T>
 		if (beginIndex == endIndex)
 			return key.equals(list.get(beginIndex)) ? beginIndex : -1;
 		
-		int middleIndex = beginIndex + (endIndex - beginIndex) / 2;
+		int middleIndex = MathUtils.getMiddleIndex(beginIndex, endIndex);
 		int diff = key.compareTo(list.get(middleIndex));
 
 		if (diff > 0)

@@ -15,8 +15,8 @@
  */
 package edu.emory.mathcs.cs323.queue;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -28,7 +28,7 @@ public class EagerPriorityQueue<T extends Comparable<T>> extends AbstractPriorit
 	
 	public EagerPriorityQueue()
 	{
-		l_keys = new LinkedList<>();
+		l_keys = new ArrayList<>();
 	}
 
 	@Override

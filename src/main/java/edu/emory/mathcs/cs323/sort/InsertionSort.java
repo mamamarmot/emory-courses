@@ -15,7 +15,8 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import java.util.List;
+import edu.emory.mathcs.utils.DSUtils;
+
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
@@ -23,9 +24,14 @@ import java.util.List;
 public class InsertionSort<T extends Comparable<T>> implements ISort<T>
 {
 	@Override
-	public void sort(List<T> list)
+	public void sort(T[] array)
 	{
+		int i, j, len = array.length;
 		
-		
+		for (i=1; i<len; i++)
+		{
+			for (j=i; j>0 && DSUtils.compareTo(array, j, j-1) < 0; j--)
+				DSUtils.swap(array, j, j-1);
+		}
 	}
 }
