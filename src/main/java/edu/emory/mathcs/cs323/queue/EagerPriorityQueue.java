@@ -48,6 +48,7 @@ public class EagerPriorityQueue<T extends Comparable<T>> extends AbstractPriorit
 	@Override
 	public T removeMax()
 	{
+		throwNoSuchElementException();
 		return l_keys.remove(l_keys.size()-1);
 	}
 }

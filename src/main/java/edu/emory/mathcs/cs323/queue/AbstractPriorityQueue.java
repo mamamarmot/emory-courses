@@ -15,18 +15,35 @@
  */
 package edu.emory.mathcs.cs323.queue;
 
+import java.util.NoSuchElementException;
+
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public abstract class AbstractPriorityQueue<T extends Comparable<T>>
 {
+	/** @param key a comparable key to be added. */
 	abstract public void add(T key);
-	abstract public T    removeMax();
-	abstract public int  size();
 	
+	/**
+	 * @return the key with the highest priority.
+	 * @throws NoSuchElementException if the queue is empty.
+	 */
+	abstract public T removeMax();
+	
+	/** @return the size of this queue. */
+	abstract public int size();
+	
+	/** @return {@code true} if the queue is empty; otherwise, {@code false}. */
 	public boolean isEmpty()
 	{
 		return size() == 0;
+	}
+	
+	protected void throwNoSuchElementException()
+	{
+		if (isEmpty())
+			throw new NoSuchElementException("No key exists.");
 	}
 }
