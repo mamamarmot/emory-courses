@@ -38,12 +38,32 @@ public class DSUtils
 	
 	static public List<Integer> getRandomIntegerList(Random rand, int size)
 	{
+		return getRandomIntegerList(rand, size, Integer.MAX_VALUE);
+	}
+	
+	static public List<Integer> getRandomIntegerList(Random rand, int size, int range)
+	{
 		List<Integer> list = new ArrayList<>(size);
 		
 		for (int i=0; i<size; i++)
-			list.add(rand.nextInt());
+			list.add(rand.nextInt(range));
 		
 		return list;
+	}
+	
+	static public Integer[] getRandomIntegerArray(Random rand, int size)
+	{
+		return getRandomIntegerArray(rand, size, Integer.MAX_VALUE);
+	}
+	
+	static public Integer[] getRandomIntegerArray(Random rand, int size, int range)
+	{
+		Integer[] array = new Integer[size];
+		
+		for (int i=0; i<size; i++)
+			array[i] = rand.nextInt(range);
+		
+		return array;
 	}
 	
 	static public int[] getRandomIntArray(Random rand, int size)
@@ -61,20 +81,38 @@ public class DSUtils
 		return list.get(i).compareTo(list.get(j));
 	}
 	
-	static public <T extends Comparable<T>>int compareTo(T[] array, int i, int j)
+	static public <T>boolean equals(T[] array1, T[] array2)
 	{
-		return array[i].compareTo(array[j]);
+		if (array1.length != array2.length) return false;
+		int i, len = array1.length;
+		
+		for (i=0; i<len; i++)
+		{
+			if (!array1[i].equals(array2[i]))
+				return false;
+		}
+		
+		return true;
 	}
 	
-	static public <T extends Comparable<T>>void swap(List<T> list, int i, int j)
+	static public <T>List<T> createNullList(int length)
 	{
-		list.set(j, list.set(i, list.get(j)));
+		List<T> list = new ArrayList<T>(length);
+		for (int i=0; i<length; i++) list.add(null);
+		return list;
 	}
 	
-	static public <T extends Comparable<T>>void swap(T[] array, int i, int j)
+	static public <T>boolean equals(List<T> a, List<T> b)
 	{
-		T t = array[i];
-		array[i] = array[j];
-		array[j] = t;
+		if (a.size() != b.size()) return false;
+		int i, size = a.size();
+		
+		for (i=0; i<size; i++)
+		{
+			if (!a.get(i).equals(b.get(i)))
+				return false;
+		}
+		
+		return true;
 	}
 }

@@ -19,12 +19,25 @@ package edu.emory.mathcs.cs323.sort;
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class SelectionSort<T extends Comparable<T>> implements ISort<T>
+public class SelectionSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	@Override
 	public void sort(T[] array)
 	{
+		final int N = array.length;
+		int min;
 		
-		
+		for (int i=0; i<N-1; i++)
+		{
+			min = i;
+			
+			for (int j=i+1; j<N; j++)
+			{
+				if (compareTo(array, j, min) < 0)
+					min = j;
+			}
+			
+			swap(array, i, min);
+		}
 	}
 }

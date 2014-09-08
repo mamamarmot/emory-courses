@@ -15,13 +15,12 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import edu.emory.mathcs.utils.DSUtils;
 
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class InsertionSort<T extends Comparable<T>> implements ISort<T>
+public class InsertionSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	@Override
 	public void sort(T[] array)
@@ -30,8 +29,8 @@ public class InsertionSort<T extends Comparable<T>> implements ISort<T>
 		
 		for (i=1; i<len; i++)
 		{
-			for (j=i; j>0 && DSUtils.compareTo(array, j, j-1) < 0; j--)
-				DSUtils.swap(array, j, j-1);
+			for (j=i; j>0 && compareTo(array, j, j-1) < 0; j--)
+				swap(array, j, j-1);
 		}
 	}
 }

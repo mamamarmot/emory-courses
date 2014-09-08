@@ -16,6 +16,7 @@
 package edu.emory.mathcs.cs323.queue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import edu.emory.mathcs.utils.DSUtils;
@@ -52,7 +53,7 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
 	public T removeMax()
 	{
 		throwNoSuchElementException();
-		DSUtils.swap(l_keys, 1, n_size);
+		Collections.swap(l_keys, 1, n_size);
 		T max = l_keys.remove(n_size--);
 		sink(1);
 		return max;
@@ -62,18 +63,18 @@ public class BinaryHeap<T extends Comparable<T>> extends AbstractPriorityQueue<T
 	{
 		while (k > 1 && DSUtils.compareTo(l_keys, k/2, k) < 0)
 		{
-			DSUtils.swap(l_keys, k/2, k);
+			Collections.swap(l_keys, k/2, k);
 			k /= 2;
 		}
 	}
 	
 	private void sink(int k)
 	{
-		for (int i=k*2; i<=n_size; k=i,i=k*2)
+		for (int i=k*2; i<=n_size; k=i,i*=2)
 		{
 			if (i < n_size && DSUtils.compareTo(l_keys, i, i+1) < 0) i++;
 			if (DSUtils.compareTo(l_keys, k, i) >= 0) break;
-			DSUtils.swap(l_keys, k, i);
+			Collections.swap(l_keys, k, i);
 		}
 	}
 }

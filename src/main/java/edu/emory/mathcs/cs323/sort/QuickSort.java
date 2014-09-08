@@ -16,15 +16,47 @@
 package edu.emory.mathcs.cs323.sort;
 
 
+
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
-public class QuickSort<T extends Comparable<T>> implements ISort<T>
+public class QuickSort<T extends Comparable<T>> extends AbstractSort<T>
 {
 	@Override
 	public void sort(T[] array)
 	{
+		sort(array, 0, array.length-1);
+	}
+	
+	/**
+	 * @param beginIndex the beginning index of the 1st partition (inclusive).
+	 * @param endIndex the ending index of the 2nd partition (inclusive).
+	 */
+	private void sort(T[] array, int beginIndex, int endIndex)
+	{
+		if (beginIndex >= endIndex) return;
+		int middleIndex = partition(array, beginIndex, endIndex);
+		sort(array, beginIndex, middleIndex-1);
+		sort(array, middleIndex+1, endIndex);
+	}
+	
+	/**
+	 * @param beginIndex the beginning index of the 1st partition (inclusive).
+	 * @param endIndex the ending index of the 2nd partition (inclusive).
+	 */
+	private int partition(T[] array, int beginIndex, int endIndex)
+	{
+		int fst = beginIndex, snd = endIndex + 1;
 		
+		while (true)
+		{
+			while (compareTo(array, beginIndex, ++fst) >= 0 && fst < endIndex);
+			while (compareTo(array, beginIndex, --snd) <= 0 && snd > beginIndex);
+			if (fst >= snd) break;
+			swap(array, fst, snd);
+		}
 		
+		swap(array, beginIndex, snd);
+		return snd;
 	}
 }
