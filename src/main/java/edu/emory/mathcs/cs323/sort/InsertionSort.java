@@ -28,9 +28,7 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSort<T>
 		int i, j, len = array.length;
 		
 		for (i=1; i<len; i++)
-		{
 			for (j=i; j>0 && compareTo(array, j, j-1) < 0; j--)
 				swap(array, j, j-1);
-		}
 	}
 }

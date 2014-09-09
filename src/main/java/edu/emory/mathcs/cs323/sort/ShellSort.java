@@ -15,8 +15,6 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-
-
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
@@ -40,11 +38,15 @@ public class ShellSort<T extends Comparable<T>> extends AbstractSort<T>
 	
 	public int getMaxH(int n)
 	{
-		int h = 1;
-		n /= 3;
+		final int upper = n / 3;
+		int h = 1, t;
 		
-		while (h < n)
-			h = 3*h + 1;
+		while (true)
+		{
+			t = 3*h + 1;
+			if (t > upper) break;
+			h = t;
+		}
 		
 		return h;
 	}

@@ -69,7 +69,7 @@ public class ComparisonSortTest
 		comp.printTotal(1000, 100, 1000, 100, 1, new Random(0), new QuickSort<>(), new HeapSort<>(), new ShellSort<>(), new MergeSort<>(), new InsertionSort<>(), new SelectionSort<>());
 	}
 	
-	@Test
+//	@Test
 	@SuppressWarnings("unchecked")
 	public void testOperations()
 	{
