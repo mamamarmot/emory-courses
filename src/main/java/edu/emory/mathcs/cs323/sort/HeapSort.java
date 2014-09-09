@@ -15,21 +15,12 @@
  */
 package edu.emory.mathcs.cs323.sort;
 
-import edu.emory.mathcs.cs323.queue.BinaryHeap;
 
 /**
  * @author Jinho D. Choi ({@code jinho.choi@emory.edu})
  */
 public class HeapSort<T extends Comparable<T>> extends AbstractSort<T>
 {
-	BinaryHeap<T> b_heap;
-	
-	public HeapSort()
-	{
-		super();
-		b_heap = new BinaryHeap<>();
-	}
-	
 	@Override
 	public void sort(T[] array)
 	{

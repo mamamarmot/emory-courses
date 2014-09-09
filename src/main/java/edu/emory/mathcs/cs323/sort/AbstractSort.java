@@ -35,7 +35,6 @@ public abstract class AbstractSort<T extends Comparable<T>>
 	 */
 	abstract public void sort(T[] array);
 	
-	
 	public void resetCounts()
 	{
 		n_comparisons = 0;
