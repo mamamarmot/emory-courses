@@ -1,0 +1,22 @@
+package select;
+
+import java.util.List;
+
+import queue.AbstractPriorityQueue;
+import queue.BinaryHeap;
+
+public class HeapSelect<T extends Comparable<T>> extends AbstractSelect<T> {
+
+	@Override
+	public T max(List<T> list, int k) {
+		// TODO Auto-generated method stub
+		throwIllegalArgumentException(list, k);
+		
+		AbstractPriorityQueue<T> s = new BinaryHeap<>();
+		for(T item : list) s.add(item);
+		for(int i = 1; i < k; i++) s.removeMax();
+		
+		return s.removeMax();
+	}
+
+}
